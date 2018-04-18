@@ -1,7 +1,6 @@
 # FORSETI SERVER
 
-![SINGLE MOST IMPORTANT THING](https://cdn.boldomatic.com/content/post/Wjq1bQ/There-is-only-one-rule-Don-t-get-used-to-it?size=800)
-To API it is :no_mouth:
+Don't get used to API as it will be a subject of frequent changes. I'll try however to keep them to minimum.
 
 ## Running Server
 
