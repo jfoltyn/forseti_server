@@ -28,6 +28,8 @@ public class AccountNumber {
    List<ThumbDetails> thumbsUpDetails = new ArrayList<>();
    List<ThumbDetails> thumbsDownDetails = new ArrayList<>();
 
+   List<Comment> comments = new ArrayList<>();
+
    AccountNumber(String number) {
       this.accountNumber = number;
    }
