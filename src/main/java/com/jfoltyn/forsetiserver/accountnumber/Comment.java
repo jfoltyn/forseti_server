@@ -2,8 +2,10 @@ package com.jfoltyn.forsetiserver.accountnumber;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class Comment {
-   String userId;
+   Date timeStamp;
    String comment;
 }
