@@ -7,8 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -25,22 +26,32 @@ public class AccountNumber {
    int thumbsUp = 0;
    int thumbsDown = 0;
 
-   List<ThumbDetails> thumbsUpDetails = new ArrayList<>();
-   List<ThumbDetails> thumbsDownDetails = new ArrayList<>();
+   Map<String, ThumbDetails> thumbsDetails = new HashMap<>();
 
-   List<Comment> comments = new ArrayList<>();
+   Map<String, List<Comment>> comments = new HashMap<>();
 
    AccountNumber(String number) {
       this.accountNumber = number;
    }
 
-   void addThumb(ThumbDetails thumbDetails) {
+   void addThumb(String userId, ThumbDetails thumbDetails) {
+      ThumbDetails previous = thumbsDetails.get(userId);
+      if (previous != null) {
+         switch (previous.thumb) {
+            case UP:
+               thumbsUp--;
+               break;
+            case DOWN:
+               thumbsDown--;
+               break;
+         }
+      }
+
       if (thumbDetails.thumb == Thumb.UP) {
          thumbsUp++;
-         thumbsUpDetails.add(thumbDetails);
       } else {
          thumbsDown++;
-         thumbsDownDetails.add(thumbDetails);
       }
+      thumbsDetails.put(userId, thumbDetails);
    }
 }

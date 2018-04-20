@@ -3,10 +3,7 @@ package com.jfoltyn.forsetiserver.controllers;
 import com.jfoltyn.forsetiserver.accountnumber.AccountNumber;
 import com.jfoltyn.forsetiserver.accountnumber.AccountNumberService;
 import com.jfoltyn.forsetiserver.accountnumber.ThumbDetails;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -26,8 +23,8 @@ public class AccountNumberRestController {
    }
 
    @RequestMapping(value = ACCOUNT_NUMBER + "/{number}", method = PUT)
-   public AccountNumber addAccountNumberThumb(@PathVariable("number") String number, @RequestBody ThumbDetails thumbDetails) {
-      return accountNumberService.addAccountNumberThumb(number, thumbDetails);
+   public AccountNumber addAccountNumberThumb(@PathVariable("number") String number, @RequestParam(value = "userId") String userId, @RequestBody ThumbDetails thumbDetails) {
+      return accountNumberService.addAccountNumberThumb(number, userId, thumbDetails);
    }
 
 }
