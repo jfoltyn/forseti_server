@@ -14,12 +14,12 @@ public class AccountNumberService {
       return accountNumberRepository.findAccountNumberByAccountNumber(number);
    }
 
-   public AccountNumber addAccountNumberThumb(String number, String userId, ThumbDetails thumbDetails) {
+   public AccountNumber addAccountNumberThumb(String number, String userId, Thumb thumb) {
       AccountNumber accountNumber = accountNumberRepository.findAccountNumberByAccountNumber(number);
       if (accountNumber == null) {
          accountNumber = new AccountNumber(number);
       }
-      accountNumber.addThumb(userId, thumbDetails);
+      accountNumber.addThumb(userId, thumb);
       return accountNumberRepository.save(accountNumber);
    }
 }

@@ -34,7 +34,7 @@ public class AccountNumber {
       this.accountNumber = number;
    }
 
-   void addThumb(String userId, ThumbDetails thumbDetails) {
+   void addThumb(String userId, Thumb thumb) {
       ThumbDetails previous = thumbsDetails.get(userId);
       if (previous != null) {
          switch (previous.thumb) {
@@ -47,11 +47,11 @@ public class AccountNumber {
          }
       }
 
-      if (thumbDetails.thumb == Thumb.UP) {
+      if (thumb == Thumb.UP) {
          thumbsUp++;
       } else {
          thumbsDown++;
       }
-      thumbsDetails.put(userId, thumbDetails);
+      thumbsDetails.put(userId, new ThumbDetails(thumb));
    }
 }
