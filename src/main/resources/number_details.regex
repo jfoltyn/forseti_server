@@ -1,2 +1,10 @@
-find: ^(?<bankName>[ĄĆĘŁŃÓŚŻŻąćęłńóśźż\w\-\(\)\"\\\./ ]+),(.+?)(?<sortCode>\d{8})(?: )?(?<outpost>[ĄĆĘŁŃÓŚŻŻąćęłńóśźż\w\-\(\)\"\\\./ ]+),(?:(?:F\.|Oper),)?(?<city>[ĄĆĘŁŃÓŚŻŻąćęłńóśźż\w\-\(\)\"\\\./ ]+?),(?<address>[ĄĆĘŁŃÓŚŻŻąćęłńóśźż\w\-\(\)\"\\\./ ]+?)(?:,| )(?<postal>\d\d\-\d\d\d[ĄĆĘŁŃÓŚŻŻąćęłńóśźż\w\-\(\)\"\\\./ ]+?),(?:[\d\-]+?,)?(?:(?<phone>\d\d \d\d\d \d\d \d\d|\d\d\d \d\d\d \d\d\d)(?:[ do\d]+?)?,)?(?:.*?)(?<somethingIgnored>\d\d\d\d\-\d\d\-\d\d.*?),(?<voivodeship>[ĄĆĘŁŃÓŚŻŻA-Z\-]+)(?:,| )(?<district>[ĄĆĘŁŃÓŚŻŻąćęłńóśźż\w\-\ ]+)(?:,|$)
-replace: ${sortCode},${bankName},${outpost},${address},${postal},${phone},${voivodeship},${district}
+find: 
+^(?<bankName>[ĄĆĘŁŃÓŚŻŻąćęłńóśźż\w\-\(\)\"\\\./ ]+),(.+?)(?<sortCode>\d{8})(?: )?(?<outpost>[ĄĆĘŁŃÓŚŻŻąćęłńóśźż\w\-\(\)\"\\\./ ]+),(?:(?:F\.|Oper),)?(?<city>[ĄĆĘŁŃÓŚŻŻąćęłńóśźż\w\-\(\)\"\\\./ ]+?),(?<address>[ĄĆĘŁŃÓŚŻŻąćęłńóśźż\w\-\(\)\"\\\./ ]+?)(?:,| )(?<postal>\d\d\-\d\d\d[ĄĆĘŁŃÓŚŻŻąćęłńóśźż\w\-\(\)\"\\\./ ]+?),(?:[\d\-]+?,)?(?:(?<phone>\d\d \d\d\d \d\d \d\d|\d\d\d \d\d\d \d\d\d)(?:[ do\d]+?)?,)?(?:.*?)(?<somethingIgnored>\d\d\d\d\-\d\d\-\d\d.*?),(?<voivodeship>[ĄĆĘŁŃÓŚŻŻA-Z\-]+)(?:,| )(?<district>[ĄĆĘŁŃÓŚŻŻąćęłńóśźż\w\-\ ]+)(?:,|$)
+
+
+replace: 
+${sortCode},${bankName},${outpost},${address},${postal},${phone},${voivodeship},${district}
+
+
+headers:
+sortCode,bankName,outpost,address,postal,phone,voivodeship,district
