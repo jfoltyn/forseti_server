@@ -22,5 +22,12 @@ Don't get used to API as it will be a subject of frequent changes. I'll try howe
 2. Go to `/swagger-ui.html`
 3. Enjoy
 
+## Generating data
+
+Execute **GET** request to `/dev/generate`. There is some degree of customizing generation process. Parameters can be seen in swagger documentation.
+
 ## Nice to have
 1. Using terminal for everything is cool, but You may find having Robo3T as MongoGUI attractive alternative [DOWNLOAD](https://robomongo.org/download)
+
+## Sort codes for banks
+In `resources/number_details_processed.csv` file there is a file with sort codes for most of polish banks with some details about them. It probably still contains error and some extra fields. It would be appreciated if someone would perfect it.
