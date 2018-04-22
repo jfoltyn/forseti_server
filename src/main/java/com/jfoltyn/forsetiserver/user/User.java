@@ -27,4 +27,12 @@ public class User {
 
    List<ThumbDetails> thumbsDetails = new ArrayList<>();
    List<Comment> comments = new ArrayList<>();
+
+   public void addThumb(ThumbDetails thumbDetails) {
+      thumbsDetails.add(thumbDetails);
+   }
+
+   public void addComment(Comment comment) {
+      comments.add(comment);
+   }
 }

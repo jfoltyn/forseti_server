@@ -15,11 +15,13 @@ public class AccountNumberService {
    }
 
    public AccountNumber addAccountNumberThumb(String number, String userId, Thumb thumb) {
+      ThumbDetails thumbDetails = new ThumbDetails(thumb);
+
       AccountNumber accountNumber = accountNumberRepository.findAccountNumberByAccountNumber(number);
       if (accountNumber == null) {
          accountNumber = new AccountNumber(number);
       }
-      accountNumber.addThumb(userId, thumb);
+      accountNumber.addThumb(userId, thumbDetails);
       return accountNumberRepository.save(accountNumber);
    }
 }

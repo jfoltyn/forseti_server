@@ -15,7 +15,7 @@ public class ThumbDetails {
    Date timeStamp;
    Thumb thumb;
 
-   ThumbDetails(Thumb thumb) {
+   public ThumbDetails(Thumb thumb) {
       this.thumb = thumb;
       timeStamp = new Date();
    }

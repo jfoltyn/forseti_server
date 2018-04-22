@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class AccountNumber {
       this.accountNumber = number;
    }
 
-   void addThumb(String userId, Thumb thumb) {
+   public void addThumb(String userId, ThumbDetails thumbDetails) {
       ThumbDetails previous = thumbsDetails.get(userId);
       if (previous != null) {
          switch (previous.thumb) {
@@ -47,11 +48,19 @@ public class AccountNumber {
          }
       }
 
-      if (thumb == Thumb.UP) {
+      if (thumbDetails.getThumb() == Thumb.UP) {
          thumbsUp++;
       } else {
          thumbsDown++;
       }
-      thumbsDetails.put(userId, new ThumbDetails(thumb));
+      thumbsDetails.put(userId, thumbDetails);
+   }
+
+   public void addComment(String userId, Comment comment) {
+      if (!comments.containsKey(userId)) {
+         comments.put(userId, new ArrayList<>());
+      }
+
+      comments.get(userId).add(comment);
    }
 }
