@@ -27,6 +27,8 @@ public class UserRestController {
 
    @RequestMapping(value = USER + "{username}", method = GET)
    public User user(@PathVariable String username) {
-      return userService.getUser(username);
+      User user = userService.getUser(username);
+      user.setPassword(null);
+      return user;
    }
 }

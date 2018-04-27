@@ -6,13 +6,16 @@ PUT http://localhost:8080/api/accountNumber/123?userId=sdflkj&thumb=UP
 
 ###
 
-POST http://localhost:8080/api/user/signup/
+POST http://localhost:8080/login
 
 {
+    "username": "string",
+    "password": "string"
 }
 
 ###
 
-GET http://localhost:8080/api/asdf
+GET http://localhost:8080/api/user/string
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE1MjU3MzEzNDF9.lV52w6PeqIYyEosLk5oX-upQbZJn4ZJzryIhwSNkvb42BppRY0OoZPpeYc4QF9ml1iUBaYs6C12JfJsFSSrzJg
 
 ###
