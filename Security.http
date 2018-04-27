@@ -1,0 +1,18 @@
+GET http://localhost:8080/api/accountNumber/123
+
+###
+
+PUT http://localhost:8080/api/accountNumber/123?userId=sdflkj&thumb=UP
+
+###
+
+POST http://localhost:8080/api/user/signup/
+
+{
+}
+
+###
+
+GET http://localhost:8080/api/asdf
+
+###

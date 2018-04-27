@@ -1,4 +1,4 @@
-package com.jfoltyn.forsetiserver.util;
+package com.jfoltyn.forsetiserver.spring;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

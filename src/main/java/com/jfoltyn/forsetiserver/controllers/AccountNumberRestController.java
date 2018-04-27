@@ -18,14 +18,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 public class AccountNumberRestController {
 
    @Resource
-   AccountNumberService accountNumberService;
+   private AccountNumberService accountNumberService;
 
-   @RequestMapping(value = ACCOUNT_NUMBER + "/{number}", method = GET)
+   @RequestMapping(value = ACCOUNT_NUMBER + "{number}", method = GET)
    public AccountNumber getAccountNumberInfo(@PathVariable("number") String number) {
       return accountNumberService.getAccountNumberInfo(number);
    }
 
-   @RequestMapping(value = ACCOUNT_NUMBER + "/{number}", method = PUT)
+   @RequestMapping(value = ACCOUNT_NUMBER + "{number}", method = PUT)
    public AccountNumber addAccountNumberThumb(@PathVariable("number") String number, @RequestParam("userId") String userId, @RequestParam("thumb") Thumb thumb) {
       return accountNumberService.addAccountNumberThumb(number, userId, thumb);
    }
