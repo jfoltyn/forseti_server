@@ -1,5 +1,6 @@
 package com.jfoltyn.forsetiserver.user;
 
+import com.jfoltyn.forsetiserver.security.UserCredentials;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -14,8 +15,10 @@ public class UserService {
    @Resource
    private UserRepository userRepository;
 
-   public void signUpUser(User user) {
-      user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+   public void signUpUser(UserCredentials userCredentials) {
+      User user = new User();
+      user.setUsername(userCredentials.getUsername());
+      user.setPassword(bCryptPasswordEncoder.encode(userCredentials.getPassword()));
       userRepository.save(user);
    }
 

@@ -26,8 +26,8 @@ public class AccountNumberRestController {
    }
 
    @RequestMapping(value = ACCOUNT_NUMBER + "{number}", method = PUT)
-   public AccountNumber addAccountNumberThumb(@PathVariable("number") String number, @RequestParam("userId") String userId, @RequestParam("thumb") Thumb thumb) {
-      return accountNumberService.addAccountNumberThumb(number, userId, thumb);
+   public AccountNumber addAccountNumberThumb(@PathVariable("number") String number, @RequestParam("username") String username, @RequestParam("thumb") Thumb thumb) {
+      return accountNumberService.addAccountNumberThumb(number, username, thumb);
    }
 
 }

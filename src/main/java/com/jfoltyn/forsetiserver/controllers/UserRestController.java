@@ -20,11 +20,6 @@ public class UserRestController {
    @Resource
    private UserService userService;
 
-   @RequestMapping(value = SIGN_UP, method = POST)
-   public void signUp(@RequestBody User user) {
-      userService.signUpUser(user);
-   }
-
    @RequestMapping(value = USER + "{username}", method = GET)
    public User user(@PathVariable String username) {
       User user = userService.getUser(username);
