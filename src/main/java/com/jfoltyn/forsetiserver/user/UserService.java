@@ -16,10 +16,23 @@ public class UserService {
    private UserRepository userRepository;
 
    public void signUpUser(UserCredentials userCredentials) {
+      checkIfUserExists(userCredentials);
+      User user = buildUser(userCredentials);
+      userRepository.save(user);
+   }
+
+   private void checkIfUserExists(UserCredentials userCredentials) {
+      User existingUser = userRepository.findByUsername(userCredentials.getUsername());
+      if(existingUser != null){
+         throw new UserAlreadyExistsException();
+      }
+   }
+
+   private User buildUser(UserCredentials userCredentials) {
       User user = new User();
       user.setUsername(userCredentials.getUsername());
       user.setPassword(bCryptPasswordEncoder.encode(userCredentials.getPassword()));
-      userRepository.save(user);
+      return user;
    }
 
    public User getUser(String username) {
