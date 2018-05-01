@@ -1,5 +1,6 @@
 package com.jfoltyn.forsetiserver.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jfoltyn.forsetiserver.accountnumber.Comment;
 import com.jfoltyn.forsetiserver.accountnumber.ThumbDetails;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 public class User {
 
    @Id
+   @JsonIgnore
    String id;
 
    String username;
