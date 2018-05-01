@@ -3,14 +3,13 @@ package com.jfoltyn.forsetiserver.controllers;
 import com.jfoltyn.forsetiserver.accountnumber.AccountNumber;
 import com.jfoltyn.forsetiserver.accountnumber.AccountNumberService;
 import com.jfoltyn.forsetiserver.accountnumber.Thumb;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.ACCOUNT_NUMBER;
+import static com.jfoltyn.forsetiserver.security.JWTUsernameExtractor.extractUsername;
+import static com.jfoltyn.forsetiserver.security.SecurityConstants.AUTHORIZATION_HEADER;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
@@ -26,7 +25,8 @@ public class AccountNumberRestController {
    }
 
    @RequestMapping(value = ACCOUNT_NUMBER + "{number}", method = PUT)
-   public AccountNumber addAccountNumberThumb(@PathVariable("number") String number, @RequestParam("username") String username, @RequestParam("thumb") Thumb thumb) {
+   public AccountNumber addAccountNumberThumb(@PathVariable("number") String number, @RequestParam("thumb") Thumb thumb, @RequestHeader(AUTHORIZATION_HEADER) String jwtToken) {
+      String username = extractUsername(jwtToken);
       return accountNumberService.addAccountNumberThumb(number, username, thumb);
    }
 

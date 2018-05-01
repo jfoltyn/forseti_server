@@ -61,7 +61,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
             .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
             .compact();
-      res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+      res.addHeader(AUTHORIZATION_HEADER, TOKEN_PREFIX + token);
 
       String responseJson = buildResponseBody(username, token);
 
@@ -72,7 +72,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
    private String buildResponseBody(String username, String token) throws JsonProcessingException {
       Map<String, String> response = new HashMap<>();
       response.put("username", username);
-      response.put("authorization", TOKEN_PREFIX + token);
+      response.put(AUTHORIZATION_HEADER, TOKEN_PREFIX + token);
       return new ObjectMapper().writeValueAsString(response);
    }
 }
