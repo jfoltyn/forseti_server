@@ -23,6 +23,7 @@ public class User {
    String id;
 
    String username;
+   @JsonIgnore
    String password;
 
    String firstName;
