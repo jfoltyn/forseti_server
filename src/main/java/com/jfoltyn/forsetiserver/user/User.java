@@ -1,6 +1,7 @@
 package com.jfoltyn.forsetiserver.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jfoltyn.forsetiserver.accountnumber.Comment;
 import com.jfoltyn.forsetiserver.accountnumber.ThumbDetails;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ public class User {
    String id;
 
    String username;
-   @JsonIgnore
+   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
    String password;
 
    String firstName;
