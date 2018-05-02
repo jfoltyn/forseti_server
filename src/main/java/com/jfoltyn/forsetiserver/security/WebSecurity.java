@@ -29,14 +29,14 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
    @Override
    protected void configure(HttpSecurity http) throws Exception {
       http.cors().and().csrf().disable()
-            .authorizeRequests()
-            .regexMatchers("/" + USER + ".*").authenticated()
-            .regexMatchers(PUT, "/" + ACCOUNT_NUMBER + ".*").authenticated()
-            .anyRequest().permitAll()
-            .and()
-            .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-            .addFilter(new JWTAuthorizationFilter(authenticationManager()))
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+         .authorizeRequests()
+         .regexMatchers("/" + USER + ".*").authenticated()
+         .regexMatchers(PUT, "/" + ACCOUNT_NUMBER + ".*").authenticated()
+         .anyRequest().permitAll()
+         .and()
+         .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+         .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
    }
 
    @Override
@@ -47,7 +47,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
    @Bean
    CorsConfigurationSource corsConfigurationSource() {
       final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-      source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+      CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+      corsConfiguration.addAllowedMethod(CorsConfiguration.ALL);
+      source.registerCorsConfiguration("/**", corsConfiguration);
       return source;
    }
 }
