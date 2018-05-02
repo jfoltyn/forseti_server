@@ -12,4 +12,9 @@ import java.util.Date;
 public class Comment {
    Date timeStamp;
    String comment;
+
+   public Comment(String comment) {
+      this.comment = comment;
+      timeStamp = new Date();
+   }
 }

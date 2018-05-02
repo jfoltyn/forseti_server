@@ -35,8 +35,8 @@ public class AccountNumber {
       this.accountNumber = number;
    }
 
-   public void addThumb(String userId, ThumbDetails thumbDetails) {
-      ThumbDetails previous = thumbsDetails.get(userId);
+   public void addThumb(String username, ThumbDetails thumbDetails) {
+      ThumbDetails previous = thumbsDetails.get(username);
       if (previous != null) {
          switch (previous.thumb) {
             case UP:
@@ -53,14 +53,14 @@ public class AccountNumber {
       } else {
          thumbsDown++;
       }
-      thumbsDetails.put(userId, thumbDetails);
+      thumbsDetails.put(username, thumbDetails);
    }
 
-   public void addComment(String userId, Comment comment) {
-      if (!comments.containsKey(userId)) {
-         comments.put(userId, new ArrayList<>());
+   public void addComment(String username, Comment comment) {
+      if (!comments.containsKey(username)) {
+         comments.put(username, new ArrayList<>());
       }
 
-      comments.get(userId).add(comment);
+      comments.get(username).add(comment);
    }
 }

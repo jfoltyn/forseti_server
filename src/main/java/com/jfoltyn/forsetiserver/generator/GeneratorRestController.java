@@ -52,7 +52,7 @@ public class GeneratorRestController {
          User user = getRandomElement(users);
          AccountNumber accountNumber = getRandomElement(accountNumbers);
 
-         user.addComment(commentToAssign);
+         user.addComment(accountNumber.getAccountNumber(), commentToAssign);
          accountNumber.addComment(user.getId(), commentToAssign);
       }
 
@@ -60,7 +60,7 @@ public class GeneratorRestController {
          for (User user : users) {
             if (random() < thumbsSaturation) {
                ThumbDetails thumbDetails = new ThumbDetails(getRandomThumb());
-               user.addThumb(thumbDetails);
+               user.addThumb(accountNumber.getAccountNumber(), thumbDetails);
                accountNumber.addThumb(user.getId(), thumbDetails);
             }
          }

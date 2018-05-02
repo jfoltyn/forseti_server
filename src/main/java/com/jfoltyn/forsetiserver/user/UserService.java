@@ -1,5 +1,7 @@
 package com.jfoltyn.forsetiserver.user;
 
+import com.jfoltyn.forsetiserver.accountnumber.Comment;
+import com.jfoltyn.forsetiserver.accountnumber.ThumbDetails;
 import com.jfoltyn.forsetiserver.security.UserCredentials;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -21,9 +23,21 @@ public class UserService {
       userRepository.save(user);
    }
 
+   public void addThumb(String username, String accountNumber, ThumbDetails thumbDetails) {
+      User user = userRepository.findByUsername(username);
+      user.addThumb(accountNumber, thumbDetails);
+      userRepository.save(user);
+   }
+
+   public void addComment(String username, String accountNumber, Comment comment) {
+      User user = userRepository.findByUsername(username);
+      user.addComment(accountNumber, comment);
+      userRepository.save(user);
+   }
+
    private void checkIfUserExists(UserCredentials userCredentials) {
       User existingUser = userRepository.findByUsername(userCredentials.getUsername());
-      if(existingUser != null){
+      if (existingUser != null) {
          throw new UserAlreadyExistsException();
       }
    }

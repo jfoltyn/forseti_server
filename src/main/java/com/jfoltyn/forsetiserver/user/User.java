@@ -11,7 +11,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -32,14 +34,17 @@ public class User {
    String email;
 
 
-   List<ThumbDetails> thumbsDetails = new ArrayList<>();
-   List<Comment> comments = new ArrayList<>();
+   Map<String, ThumbDetails> thumbsDetails = new HashMap<>();
+   Map<String, List<Comment>> comments = new HashMap<>();
 
-   public void addThumb(ThumbDetails thumbDetails) {
-      thumbsDetails.add(thumbDetails);
+   public void addThumb(String accountNumber, ThumbDetails thumbDetails) {
+      thumbsDetails.put(accountNumber, thumbDetails);
    }
 
-   public void addComment(Comment comment) {
-      comments.add(comment);
+   public void addComment(String accountNumber, Comment comment) {
+      if (!comments.containsKey(accountNumber)) {
+         comments.put(accountNumber, new ArrayList<>());
+      }
+      comments.get(accountNumber).add(comment);
    }
 }
