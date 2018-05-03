@@ -12,7 +12,7 @@ import static java.lang.Math.random;
 @Component
 public class CommentGenerator {
    public Comment generate(Date oldestActivityDate) {
-      return new Comment(getRandomDateSince(oldestActivityDate), getRandomLengthLorem());
+      return new Comment(getRandomLengthLorem(), getRandomDateSince(oldestActivityDate));
    }
 
    private Date getRandomDateSince(Date dateSince) {
