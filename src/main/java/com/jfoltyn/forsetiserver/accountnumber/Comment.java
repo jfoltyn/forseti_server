@@ -3,6 +3,7 @@ package com.jfoltyn.forsetiserver.accountnumber;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = {"id"})
 public class Comment {
    static AtomicLong idCounter = new AtomicLong();
 

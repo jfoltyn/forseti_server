@@ -6,5 +6,6 @@ public interface ServiceDictionary {
    String ACCOUNT_NUMBER_THUMB = ACCOUNT_NUMBER + "thumb/";
    String ACCOUNT_NUMBER_COMMENT= ACCOUNT_NUMBER + "comment/";
    String USER = API + "user/";
+   String USER_COMMENT = USER + "comment/";
    String SIGN_UP = "signup/";
 }
