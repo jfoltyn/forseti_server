@@ -34,6 +34,7 @@ public class User {
    String lastName;
    String email;
 
+   boolean isRemoved = false;
 
    @ApiModelProperty(notes = "Map with accountNumber to thumbDetails mapping")
    Map<String, ThumbDetails> thumbsDetails = new HashMap<>();

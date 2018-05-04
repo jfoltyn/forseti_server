@@ -34,6 +34,9 @@ public class AccountNumber {
    @ApiModelProperty(notes = "Map with username to list of comments mapping")
    Map<String, List<Comment>> comments = new HashMap<>();
 
+   @ApiModelProperty(notes = "Map with username (who is removed) to list of comments mapping")
+   Map<String, List<Comment>> removedUsersComments = new HashMap<>();
+
    AccountNumber(String number) {
       this.accountNumber = number;
    }
