@@ -3,6 +3,7 @@ package com.jfoltyn.forsetiserver.controllers;
 import com.jfoltyn.forsetiserver.accountnumber.AccountNumberService;
 import com.jfoltyn.forsetiserver.admin.AdminService;
 import com.jfoltyn.forsetiserver.admin.UsersList;
+import com.jfoltyn.forsetiserver.user.User;
 import com.jfoltyn.forsetiserver.user.UserService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import javax.annotation.Resource;
 
 import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.ADMIN_USER;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 public class AdminRestController {
@@ -24,6 +26,11 @@ public class AdminRestController {
 
    @Resource
    private AccountNumberService accountNumberService;
+
+   @RequestMapping(value = ADMIN_USER + "{username}", method = GET)
+   public User getUser(@PathVariable("username") String username) {
+      return adminService.getUser(username);
+   }
 
    @RequestMapping(value = ADMIN_USER + "{username}", method = DELETE)
    public UsersList deleteUser(@PathVariable("username") String username) {

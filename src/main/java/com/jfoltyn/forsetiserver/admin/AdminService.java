@@ -21,6 +21,14 @@ public class AdminService {
    @Resource
    private AccountNumberRepository accountNumberRepository;
 
+   public User getUser(String username) {
+      User existingUser = userRepository.findByUsername(username);
+      if (existingUser == null) {
+         throw new UserDoesntExistsException();
+      }
+      return existingUser;
+   }
+
    public User removeUser(String username) {
       User user = getUser(username);
       user.setRemoved(true);
@@ -41,14 +49,6 @@ public class AdminService {
       removedTrue.forEach(user -> usersList.getRemovedUsers().add(user.getUsername()));
 
       return usersList;
-   }
-
-   private User getUser(String username) {
-      User existingUser = userRepository.findByUsername(username);
-      if (existingUser == null) {
-         throw new UserDoesntExistsException();
-      }
-      return existingUser;
    }
 
    private void updateAccountNumbersWhereUserHaveCommented(User user) {
