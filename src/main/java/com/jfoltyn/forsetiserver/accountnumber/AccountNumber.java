@@ -1,6 +1,7 @@
 package com.jfoltyn.forsetiserver.accountnumber;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,8 +28,10 @@ public class AccountNumber {
    int thumbsUp = 0;
    int thumbsDown = 0;
 
+   @ApiModelProperty(notes = "Map with username to thumbDetails mapping")
    Map<String, ThumbDetails> thumbsDetails = new HashMap<>();
 
+   @ApiModelProperty(notes = "Map with username to list of comments mapping")
    Map<String, List<Comment>> comments = new HashMap<>();
 
    AccountNumber(String number) {
