@@ -12,11 +12,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.ACCOUNT_NUMBER;
-import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.USER;
+import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.*;
 import static org.springframework.http.HttpMethod.PUT;
 
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
    private UserDetailsService userDetailsService;
    private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -31,6 +30,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
       http.cors().and().csrf().disable()
          .authorizeRequests()
          .regexMatchers("/" + USER + ".*").authenticated()
+         .regexMatchers("/" + ADMIN + ".*").hasRole(SecurityConstants.ADMIN)
          .regexMatchers(PUT, "/" + ACCOUNT_NUMBER + ".*").authenticated()
          .anyRequest().permitAll()
          .and()

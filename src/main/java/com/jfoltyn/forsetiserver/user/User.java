@@ -35,6 +35,7 @@ public class User {
    String email;
 
    boolean isRemoved = false;
+   boolean isAdmin = false;
 
    @ApiModelProperty(notes = "Map with accountNumber to thumbDetails mapping")
    Map<String, ThumbDetails> thumbsDetails = new HashMap<>();
