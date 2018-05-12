@@ -1,5 +1,6 @@
 package com.jfoltyn.forsetiserver.controllers;
 
+import com.jfoltyn.forsetiserver.accountnumber.AccountNumber;
 import com.jfoltyn.forsetiserver.accountnumber.AccountNumberService;
 import com.jfoltyn.forsetiserver.admin.AdminService;
 import com.jfoltyn.forsetiserver.admin.UsersList;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.ADMIN_USER;
+import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.*;
 import static com.jfoltyn.forsetiserver.security.SecurityConstants.AUTHORIZATION_HEADER;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -40,5 +41,11 @@ public class AdminRestController {
    public UsersList deleteUser(@PathVariable("username") String username) {
       adminService.removeUser(username);
       return adminService.getUsersList();
+   }
+
+   @RequestMapping(value = ADMIN + "accountNumber/" + "{number}/" + "comment/" + "{commentId}" , method = DELETE)
+   @ApiImplicitParam(name = AUTHORIZATION_HEADER, value = AUTHORIZATION_HEADER, required = true, dataType = "String", paramType = "header")
+   public AccountNumber deleteAccountNumberComment(@PathVariable("number") String number, @PathVariable("commentId") String commentId) {
+      return adminService.deleteAccountNumberComment(number, commentId);
    }
 }
