@@ -10,7 +10,10 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class AdminService {
@@ -59,5 +62,13 @@ public class AdminService {
          accountNumberDocument.getRemovedUsersComments().put(user.getUsername(), commentsFromRemovedUser);
          accountNumberRepository.save(accountNumberDocument);
       }
+   }
+
+   public AccountNumber deleteAccountNumberComment(String number, String commentId) {
+      AccountNumber accountNumberWithCommentToDelete = accountNumberRepository.findAccountNumberByAccountNumber(number);
+
+      accountNumberWithCommentToDelete.getComments().forEach((k, v) -> v.removeIf(comment -> comment.getId() == Long.valueOf(commentId)));
+
+      return accountNumberRepository.save(accountNumberWithCommentToDelete);
    }
 }
