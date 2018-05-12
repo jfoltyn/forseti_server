@@ -43,7 +43,7 @@ public class AdminRestController {
       return adminService.getUsersList();
    }
 
-   @RequestMapping(value = ADMIN + "accountNumber/" + "{number}/" + "comment/" + "{commentId}" , method = DELETE)
+   @RequestMapping(value = ADMIN_NUMBER + "{number}/" + COMMENT + "{commentId}" , method = DELETE)
    @ApiImplicitParam(name = AUTHORIZATION_HEADER, value = AUTHORIZATION_HEADER, required = true, dataType = "String", paramType = "header")
    public AccountNumber deleteAccountNumberComment(@PathVariable("number") String number, @PathVariable("commentId") String commentId) {
       return adminService.deleteAccountNumberComment(number, commentId);
