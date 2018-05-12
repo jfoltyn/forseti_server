@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
-import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.ACCOUNT_NUMBER;
-import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.ACCOUNT_NUMBER_COMMENT;
-import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.ACCOUNT_NUMBER_THUMB;
-import static com.jfoltyn.forsetiserver.security.JWTUsernameExtractor.extractUsername;
+import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.*;
+import static com.jfoltyn.forsetiserver.security.JWTExtractor.extractUsername;
 import static com.jfoltyn.forsetiserver.security.SecurityConstants.AUTHORIZATION_HEADER;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;

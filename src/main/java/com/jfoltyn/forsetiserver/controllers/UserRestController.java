@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 
 import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.USER;
 import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.USER_COMMENT;
-import static com.jfoltyn.forsetiserver.security.JWTUsernameExtractor.extractUsername;
+import static com.jfoltyn.forsetiserver.security.JWTExtractor.extractUsername;
 import static com.jfoltyn.forsetiserver.security.SecurityConstants.AUTHORIZATION_HEADER;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;

@@ -3,12 +3,14 @@ package com.jfoltyn.forsetiserver.security;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfoltyn.forsetiserver.user.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -54,19 +56,32 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                            HttpServletResponse res,
                                            FilterChain chain,
                                            Authentication auth) throws IOException, ServletException {
+      Claims claims = getClaims(auth);
 
-      String username = ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername();
       String token = Jwts.builder()
-            .setSubject(username)
-            .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+            .setClaims(claims)
             .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
             .compact();
+
       res.addHeader(AUTHORIZATION_HEADER, TOKEN_PREFIX + token);
 
-      String responseJson = buildResponseBody(username, token);
+      String responseJson = buildResponseBody(claims.getSubject(), token);
 
       res.setContentType(APPLICATION_JSON_VALUE);
       res.getWriter().write(responseJson);
+   }
+
+   private Claims getClaims(Authentication auth) {
+      Claims claims = Jwts.claims();
+
+      claims.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME));
+
+      String username = ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername();
+      claims.setSubject(username);
+
+      String role = ((SimpleGrantedAuthority) auth.getAuthorities().toArray()[0]).getAuthority();
+      claims.put(ROLE_PAYLOAD_KEY, role);
+      return claims;
    }
 
    private String buildResponseBody(String username, String token) throws JsonProcessingException {

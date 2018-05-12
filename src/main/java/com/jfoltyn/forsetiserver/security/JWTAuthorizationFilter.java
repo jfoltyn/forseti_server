@@ -1,7 +1,9 @@
 package com.jfoltyn.forsetiserver.security;
 
+import io.jsonwebtoken.Claims;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -10,10 +12,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Collections;
 
-import static com.jfoltyn.forsetiserver.security.SecurityConstants.AUTHORIZATION_HEADER;
-import static com.jfoltyn.forsetiserver.security.SecurityConstants.TOKEN_PREFIX;
+import static com.jfoltyn.forsetiserver.security.SecurityConstants.*;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
@@ -42,12 +43,10 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
       String token = request.getHeader(AUTHORIZATION_HEADER);
       if (token != null) {
          // parse the token.
-         String user = JWTUsernameExtractor.extractUsername(token);
-
-         if (user != null) {
-            return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
-         }
-         return null;
+         Claims claims = JWTExtractor.extractClaims(token);
+         return new UsernamePasswordAuthenticationToken(claims.getSubject(),
+               null,
+               Collections.singletonList(new SimpleGrantedAuthority(claims.get(ROLE_PAYLOAD_KEY, String.class))));
       }
       return null;
    }
