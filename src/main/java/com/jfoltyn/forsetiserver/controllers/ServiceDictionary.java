@@ -5,6 +5,8 @@ public interface ServiceDictionary {
 
    String API = "api/";
 
+   String COMMENT = "comment/";
+
    String ACCOUNT_NUMBER = API + "accountNumber/";
    String ACCOUNT_NUMBER_THUMB = ACCOUNT_NUMBER + "thumb/";
    String ACCOUNT_NUMBER_COMMENT= ACCOUNT_NUMBER + "comment/";
@@ -14,4 +16,5 @@ public interface ServiceDictionary {
 
    String ADMIN = API + "admin/";
    String ADMIN_USER = ADMIN + "user/";
+   String ADMIN_NUMBER = ADMIN + "accountNumber/";
 }
