@@ -1,7 +1,6 @@
 package com.jfoltyn.forsetiserver.controllers;
 
 import com.jfoltyn.forsetiserver.security.UserCredentials;
-import com.jfoltyn.forsetiserver.user.User;
 import com.jfoltyn.forsetiserver.user.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,8 +19,9 @@ public class AuthenticationRestController {
    private UserService userService;
 
    @RequestMapping(value = SIGN_UP, method = POST)
-   public void signUp(@RequestBody UserCredentials userCredentials) {
+   public String signUp(@RequestBody UserCredentials userCredentials) {
       userService.signUpUser(userCredentials);
+      return "{}";
    }
 
    @PostMapping("/login")
