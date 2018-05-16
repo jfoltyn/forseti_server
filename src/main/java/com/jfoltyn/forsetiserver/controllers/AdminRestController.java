@@ -48,4 +48,10 @@ public class AdminRestController {
    public AccountNumber deleteAccountNumberComment(@PathVariable("number") String number, @PathVariable("commentId") String commentId) {
       return adminService.deleteAccountNumberComment(number, commentId);
    }
+
+   @RequestMapping(value = ADMIN_USER + "{username}/" + COMMENT + "{commentId}", method = DELETE)
+   @ApiImplicitParam(name = AUTHORIZATION_HEADER, value = AUTHORIZATION_HEADER, required = true, dataType = "String", paramType = "header")
+   public User deleteComment(@PathVariable("username") String username ,@PathVariable("commentId") long commentId) {
+      return userService.deleteComment(username, commentId);
+   }
 }
