@@ -1,5 +1,12 @@
 package com.jfoltyn.forsetiserver.controllers;
 
+import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.ADMIN_NUMBER;
+import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.ADMIN_USER;
+import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.COMMENT;
+import static com.jfoltyn.forsetiserver.security.SecurityConstants.AUTHORIZATION_HEADER;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 import com.jfoltyn.forsetiserver.accountnumber.AccountNumber;
 import com.jfoltyn.forsetiserver.accountnumber.AccountNumberService;
 import com.jfoltyn.forsetiserver.admin.AdminService;
@@ -7,16 +14,10 @@ import com.jfoltyn.forsetiserver.admin.UsersList;
 import com.jfoltyn.forsetiserver.user.User;
 import com.jfoltyn.forsetiserver.user.UserService;
 import io.swagger.annotations.ApiImplicitParam;
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
-
-import static com.jfoltyn.forsetiserver.controllers.ServiceDictionary.*;
-import static com.jfoltyn.forsetiserver.security.SecurityConstants.AUTHORIZATION_HEADER;
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 public class AdminRestController {
@@ -51,7 +52,8 @@ public class AdminRestController {
 
    @RequestMapping(value = ADMIN_USER + "{username}/" + COMMENT + "{commentId}", method = DELETE)
    @ApiImplicitParam(name = AUTHORIZATION_HEADER, value = AUTHORIZATION_HEADER, required = true, dataType = "String", paramType = "header")
-   public User deleteComment(@PathVariable("username") String username ,@PathVariable("commentId") long commentId) {
+   public User deleteComment(@PathVariable("username") String username,
+       @PathVariable("commentId") long commentId) {
       return userService.deleteComment(username, commentId);
    }
 }
