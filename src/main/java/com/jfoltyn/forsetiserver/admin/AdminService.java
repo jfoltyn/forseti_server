@@ -3,14 +3,17 @@ package com.jfoltyn.forsetiserver.admin;
 import com.jfoltyn.forsetiserver.accountnumber.AccountNumber;
 import com.jfoltyn.forsetiserver.accountnumber.AccountNumberRepository;
 import com.jfoltyn.forsetiserver.accountnumber.Comment;
+import com.jfoltyn.forsetiserver.accountnumber.Thumb;
+import com.jfoltyn.forsetiserver.accountnumber.ThumbDetails;
 import com.jfoltyn.forsetiserver.user.User;
 import com.jfoltyn.forsetiserver.user.UserRepository;
+import com.jfoltyn.forsetiserver.user.exception.NoSuchThumbException;
 import com.jfoltyn.forsetiserver.user.exception.UserDoesntExistsException;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
+import javax.annotation.Resource;
+import org.springframework.stereotype.Component;
 
 @Component
 public class AdminService {
@@ -67,5 +70,33 @@ public class AdminService {
       accountNumberWithCommentToDelete.getComments().forEach((k, v) -> v.removeIf(comment -> comment.getId() == Long.valueOf(commentId)));
 
       return accountNumberRepository.save(accountNumberWithCommentToDelete);
+   }
+
+   public User deleteThumb(String username, String number, Thumb thumb) {
+      User userWithThumbToDelete = userRepository.findByUsername(username);
+      String thumbToDelete = null;
+
+      for (Entry<String, ThumbDetails> entry : userWithThumbToDelete.getThumbsDetails().entrySet()) {
+         if (entry.getKey().equals(number)) {
+            thumbToDelete = number;
+         }
+      }
+
+      if (thumbToDelete == null) {
+         throw new NoSuchThumbException();
+      }
+
+      userWithThumbToDelete.getThumbsDetails().remove(number);
+
+      AccountNumber accountNumberWithThumbToDelete = accountNumberRepository.findAccountNumberByAccountNumber(number);
+      if (thumb.equals(Thumb.UP)) {
+         accountNumberWithThumbToDelete.setThumbsUp(accountNumberWithThumbToDelete.getThumbsUp() - 1);
+      } else {
+         accountNumberWithThumbToDelete.setThumbsDown(accountNumberWithThumbToDelete.getThumbsDown() - 1);
+      }
+
+      accountNumberWithThumbToDelete.getThumbsDetails().remove(username);
+      accountNumberRepository.save(accountNumberWithThumbToDelete);
+      return userRepository.save(userWithThumbToDelete);
    }
 }
