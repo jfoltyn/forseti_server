@@ -7,6 +7,8 @@ public interface ServiceDictionary {
 
    String COMMENT = "comment/";
 
+   String NUMBER = "number/";
+
    String ACCOUNT_NUMBER = API + "accountNumber/";
    String ACCOUNT_NUMBER_THUMB = ACCOUNT_NUMBER + "thumb/";
    String ACCOUNT_NUMBER_COMMENT= ACCOUNT_NUMBER + "comment/";
