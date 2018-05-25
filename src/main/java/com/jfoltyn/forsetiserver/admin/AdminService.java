@@ -7,6 +7,7 @@ import com.jfoltyn.forsetiserver.accountnumber.Thumb;
 import com.jfoltyn.forsetiserver.accountnumber.ThumbDetails;
 import com.jfoltyn.forsetiserver.user.User;
 import com.jfoltyn.forsetiserver.user.UserRepository;
+import com.jfoltyn.forsetiserver.user.exception.NoSuchAccountNumberException;
 import com.jfoltyn.forsetiserver.user.exception.NoSuchThumbException;
 import com.jfoltyn.forsetiserver.user.exception.UserDoesntExistsException;
 import java.util.ArrayList;
@@ -98,5 +99,15 @@ public class AdminService {
       accountNumberWithThumbToDelete.getThumbsDetails().remove(username);
       accountNumberRepository.save(accountNumberWithThumbToDelete);
       return userRepository.save(userWithThumbToDelete);
+   }
+
+   public void deleteAccountNumber(String number) {
+      AccountNumber accountNumberToDelete = accountNumberRepository.findAccountNumberByAccountNumber(number);
+
+      if(accountNumberToDelete == null){
+         throw new NoSuchAccountNumberException();
+      }
+
+      accountNumberRepository.delete(accountNumberToDelete);
    }
 }
