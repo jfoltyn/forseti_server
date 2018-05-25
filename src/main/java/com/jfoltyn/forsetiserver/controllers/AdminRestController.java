@@ -17,9 +17,11 @@ import com.jfoltyn.forsetiserver.user.User;
 import com.jfoltyn.forsetiserver.user.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import javax.annotation.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -63,5 +65,12 @@ public class AdminRestController {
    @ApiImplicitParam(name = AUTHORIZATION_HEADER, value = AUTHORIZATION_HEADER, required = true, dataType = "String", paramType = "header")
    public User deleteThumb(@PathVariable("username") String username, @PathVariable("number") String number, @RequestParam("thumb") Thumb thumb) {
       return adminService.deleteThumb(username, number, thumb);
+   }
+
+   @ResponseStatus(code = HttpStatus.NO_CONTENT)
+   @RequestMapping(value = ADMIN_NUMBER + "{number}" , method = DELETE)
+   @ApiImplicitParam(name = AUTHORIZATION_HEADER, value = AUTHORIZATION_HEADER, required = true, dataType = "String", paramType = "header")
+   public void deleteAccountNumber(@PathVariable("number") String number) {
+      adminService.deleteAccountNumber(number);
    }
 }
