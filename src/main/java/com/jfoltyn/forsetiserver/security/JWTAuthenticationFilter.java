@@ -38,13 +38,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                                HttpServletResponse res) throws AuthenticationException {
       try {
          User creds = new ObjectMapper()
-               .readValue(req.getInputStream(), User.class);
+            .readValue(req.getInputStream(), User.class);
 
          return authenticationManager.authenticate(
-               new UsernamePasswordAuthenticationToken(
-                     creds.getUsername(),
-                     creds.getPassword(),
-                     new ArrayList<>())
+            new UsernamePasswordAuthenticationToken(
+               creds.getUsername(),
+               creds.getPassword(),
+               new ArrayList<>())
          );
       } catch (IOException e) {
          throw new RuntimeException(e);
@@ -59,13 +59,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
       Claims claims = getClaims(auth);
 
       String token = Jwts.builder()
-            .setClaims(claims)
-            .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
-            .compact();
+         .setClaims(claims)
+         .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
+         .compact();
 
       res.addHeader(AUTHORIZATION_HEADER, TOKEN_PREFIX + token);
 
-      String responseJson = buildResponseBody(claims.getSubject(), token);
+      boolean isAdmin = claims.get(ROLE_PAYLOAD_KEY, String.class).contains(ADMIN);
+      String responseJson = buildResponseBody(claims.getSubject(), isAdmin, token);
 
       res.setContentType(APPLICATION_JSON_VALUE);
       res.getWriter().write(responseJson);
@@ -84,9 +85,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
       return claims;
    }
 
-   private String buildResponseBody(String username, String token) throws JsonProcessingException {
+   private String buildResponseBody(String username, boolean isAdmin, String token) throws JsonProcessingException {
       Map<String, String> response = new HashMap<>();
       response.put("username", username);
+      response.put("isAdmin", String.valueOf(isAdmin));
       response.put(AUTHORIZATION_HEADER, TOKEN_PREFIX + token);
       return new ObjectMapper().writeValueAsString(response);
    }
