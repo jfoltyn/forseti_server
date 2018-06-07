@@ -19,4 +19,5 @@ public interface ServiceDictionary {
    String ADMIN = API + "admin/";
    String ADMIN_USER = ADMIN + "user/";
    String ADMIN_NUMBER = ADMIN + "accountNumber/";
+   String ADMIN_USERS_LIST = ADMIN + "userslist/";
 }
