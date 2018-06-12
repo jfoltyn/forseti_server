@@ -1,6 +1,6 @@
 # FORSETI SERVER
 
-Don't get used to API as it will be a subject of frequent changes. I'll try however to keep them to minimum.
+Backend for FORSETI project.
 
 ## Running Server
 
